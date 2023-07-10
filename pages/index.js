@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import ListarVentas from '../components/listarVentas';
+import { getVentas } from '../helper.js/api-util';
+import ventasFiltradas from '../components/buscarVentas';
 
-export default function Home() {
+export default function Home(props) {
   const [showList, setShowList] = useState(false);
 
   function changeStateList() {
@@ -27,6 +28,9 @@ export default function Home() {
         {/* si estado===true entonces muestro componente listarVentas */}
         {showList && <ListarVentas />}
 
+        <ventasFiltradas items={props.events} />{/* manda los datos al componente que los estructura en lista */}
+{/* se supone va a un EventList, componente con la estructura a desplegar... */}
+
         <p>Opciones para colocar fechas y enviar el componente de filtroFechas</p>
         <h2>Formulario</h2>
         <form action="/submit" method="POST">
@@ -40,11 +44,10 @@ export default function Home() {
     </div>
   )
 }
-import { getFeaturedEvents } from '../helpers/api-util';
-<EventList items={props.events} />{/* manda los datos al componente que los estructura en lista */}
+
 
 export async function getStaticProps() {
-  const ventasFiltradas = await getFeaturedEvents();
+  const ventasFiltradas = await getVentas();
 
   return {
     props: {
