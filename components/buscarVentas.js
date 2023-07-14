@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function ventasFiltradas(props) {
+function SalesFiltered(props) {
     const yearInputRef = useRef();
     const monthInputRef = useRef();
   
@@ -14,7 +14,7 @@ function ventasFiltradas(props) {
     }
   
     return (
-      <form className={classes.form} onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
         <div>
           <div>
             <label htmlFor='year'>Year</label>
@@ -46,4 +46,4 @@ function ventasFiltradas(props) {
     );
 }
 
-export default ventasFiltradas;
+export default SalesFiltered;

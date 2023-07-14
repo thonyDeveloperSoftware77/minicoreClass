@@ -1,16 +1,29 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
-import ListarVentas from '../components/listarVentas';
-import { getVentas } from '../helper.js/api-util';
-import ventasFiltradas from '../components/buscarVentas';
+import SalesList from '../components/listarVentas';
+import SalesFiltered from '../components/buscarVentas';
+import { useRouter } from 'next/router';
 
 export default function Home(props) {
   const [showList, setShowList] = useState(false);
+  const [salesItems, setSalesItems] = useState();
+  const router = useRouter;
 
-  function changeStateList() {
+  function showSales() {
     setShowList(!showList);
-  };
+    fetch('/api/sales')
+      .then((response) => response.json())
+      .then((data) => {
+        setSalesItems(data.sales)
+      });
+      console.log(salesItems);
+  }
+
+  function findSalesHandler(year, month) {
+    const fullPath = `/${year}/${month}`;
+    router.push(fullPath);
+  }
 
   return (
     <div className={styles.container}>
@@ -20,22 +33,28 @@ export default function Home(props) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}> Mini-Core </h1>
+        <h1 className={styles.title}> MiniCore </h1>
 
         <div>
-          <button onClick={changeStateList}>Ver Ventas</button>
+          <button onClick={showSales}>Ver Ventas</button>
         </div>
         {/* si estado===true entonces muestro componente listarVentas */}
-        {showList && <ListarVentas />}
+        {showList && <SalesList />}
 
-        <ventasFiltradas items={props.events} />{/* manda los datos al componente que los estructura en lista */}
-{/* se supone va a un EventList, componente con la estructura a desplegar... */}
+        {/* <SalesFiltered onSearch={findSalesHandler}/> */}
+       {/*  <SalesList items={props.sales} /> */}{/* manda los datos al componente que los estructura en lista */}
+        <ul>
+          {salesItems && salesItems.map((item) => {
+            <li key={item._id}>{item.amount}</li>
+          })}
+        </ul>
+
 
         <p>Opciones para colocar fechas y enviar el componente de filtroFechas</p>
         <h2>Formulario</h2>
         <form action="/submit" method="POST">
           <label for="name">Nombre:</label>
-          <input type="text" id="name" name="name" required></input><br/>
+          <input type="text" id="name" name="name" required></input><br />
         </form>
       </main>
 
@@ -45,14 +64,3 @@ export default function Home(props) {
   )
 }
 
-
-export async function getStaticProps() {
-  const ventasFiltradas = await getVentas();
-
-  return {
-    props: {
-      events: ventasFiltradas,
-    },
-    revalidate: 1800,
-  };
-}
