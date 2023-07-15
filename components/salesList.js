@@ -13,7 +13,7 @@ function SalesList(props) {
                 {/* send data to oredered list component*/}
                 {sales.map((sale) =>
                     <SaleItem
-                        key={sale.id}
+                        key={sale._id}
                         id={sale._id}
                         customer={sale.customerId}
                         product={sale.product}
