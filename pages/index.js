@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
-import SalesList from '../components/listarVentas';
+import SalesList from '../components/salesList';
 import SalesFiltered from '../components/buscarVentas';
 import { useRouter } from 'next/router';
 
 export default function Home(props) {
   const [showList, setShowList] = useState(false);
-  const [salesItems, setSalesItems] = useState();
+  const [salesItems, setSalesItems] = useState([]);
   const router = useRouter;
 
   function showSales() {
@@ -38,13 +38,13 @@ export default function Home(props) {
         <div>
           <button onClick={showSales}>Ver Ventas</button>
         </div>
-        {/* si estado===true entonces muestro componente listarVentas */}
-        {showList && <SalesList />}
 
         {/* <SalesFiltered onSearch={findSalesHandler}/> */}
-       {/*  <SalesList items={props.sales} /> */}{/* manda los datos al componente que los estructura en lista */}
+
+        {/* si estado===true entonces muestro componente listarVentas */}
+        {showList && <SalesList sales={salesItems} />} {/* Pasa los datos de salesItems al componente SalesList */}
         <ul>
-          {salesItems && salesItems.map((item) => {
+          {salesItems.map((item) => {
             <li key={item._id}>{item.amount}</li>
           })}
         </ul>
@@ -53,7 +53,7 @@ export default function Home(props) {
         <p>Opciones para colocar fechas y enviar el componente de filtroFechas</p>
         <h2>Formulario</h2>
         <form action="/submit" method="POST">
-          <label for="name">Nombre:</label>
+          <label htmlFor="name">Nombre:</label>
           <input type="text" id="name" name="name" required></input><br />
         </form>
       </main>
