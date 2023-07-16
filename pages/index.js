@@ -2,14 +2,14 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import SalesList from '../components/salesList';
-import SalesFiltered from '../components/buscarVentas';
+import SalesFiltered from '../components/searchSales';
 import { useRouter } from 'next/router';
 import TableList from '../components/tableList';
 
 export default function Home(props) {
   const [showList, setShowList] = useState(false);
   const [salesItems, setSalesItems] = useState([]);
-  const router = useRouter;
+  const router = useRouter();
 
   function showSales() {
     setShowList(!showList);
@@ -18,7 +18,7 @@ export default function Home(props) {
       .then((data) => {
         setSalesItems(data.sales)
       });
-      console.log(salesItems);
+    console.log(salesItems);
   }
 
   function findSalesHandler(year, month) {
@@ -44,14 +44,10 @@ export default function Home(props) {
 
         {/* si estado===true entonces muestro componente listarVentas */}
         {showList && <TableList sales={salesItems} />} {/* Pasa los datos de salesItems al componente SalesList */}
-
-
-        <p>Opciones para colocar fechas y enviar el componente de filtroFechas</p>
-        <h2>Formulario</h2>
-        <form action="/submit" method="POST">
-          <label htmlFor="name">Nombre:</label>
-          <input type="text" id="name" name="name" required></input><br />
-        </form>
+        <br />
+        <h3>Calcular comisión</h3>
+        <SalesFiltered onSearch={findSalesHandler} />
+        <input type='date'></input>
       </main>
 
       <footer className={styles.footer}>
