@@ -43,11 +43,6 @@ export default function Home(props) {
 
         {/* si estado===true entonces muestro componente listarVentas */}
         {showList && <SalesList sales={salesItems} />} {/* Pasa los datos de salesItems al componente SalesList */}
-        <ul>
-          {salesItems.map((item) => {
-            <li key={item._id}>{item.amount}</li>
-          })}
-        </ul>
 
 
         <p>Opciones para colocar fechas y enviar el componente de filtroFechas</p>

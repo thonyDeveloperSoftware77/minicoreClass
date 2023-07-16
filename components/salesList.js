@@ -4,7 +4,7 @@ import SaleItem from "./saleItem";
 
 function SalesList(props) {
     const { sales } = props;
-
+    console.log(sales.seller)
     //return general unOrdered list of sales
     return (
         <div>
@@ -15,7 +15,7 @@ function SalesList(props) {
                     <SaleItem
                         key={sale._id}
                         id={sale._id}
-                        customer={sale.customerId}
+                        seller={sale.sellerName}
                         product={sale.product}
                         amount={sale.amount}
                     />

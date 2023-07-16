@@ -1,7 +1,7 @@
 //return ordered list of items's sales
 
 function SaleItem(props) {
-    const {id, customer, product, amount} = props
+    const {id, seller, product, amount} = props
     //dar formato y calcular 0.0
 
     //return ordered list of items's sales
@@ -9,7 +9,7 @@ function SaleItem(props) {
         <li>
             <p>Fecha venta</p>
             <br/>
-            <h3>Vendedor: {customer}</h3>
+            <h3>Vendedor: {seller}</h3>
             <br/>
             <p>Producto: {product}</p>
             <br/>
