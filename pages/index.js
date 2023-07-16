@@ -4,6 +4,7 @@ import { useState } from 'react'
 import SalesList from '../components/salesList';
 import SalesFiltered from '../components/buscarVentas';
 import { useRouter } from 'next/router';
+import TableList from '../components/tableList';
 
 export default function Home(props) {
   const [showList, setShowList] = useState(false);
@@ -42,7 +43,7 @@ export default function Home(props) {
         {/* <SalesFiltered onSearch={findSalesHandler}/> */}
 
         {/* si estado===true entonces muestro componente listarVentas */}
-        {showList && <SalesList sales={salesItems} />} {/* Pasa los datos de salesItems al componente SalesList */}
+        {showList && <TableList sales={salesItems} />} {/* Pasa los datos de salesItems al componente SalesList */}
 
 
         <p>Opciones para colocar fechas y enviar el componente de filtroFechas</p>

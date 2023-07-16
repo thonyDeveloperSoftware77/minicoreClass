@@ -15,6 +15,7 @@ function SalesList(props) {
                     <SaleItem
                         key={sale._id}
                         id={sale._id}
+                        date={sale.date}
                         seller={sale.sellerName}
                         product={sale.product}
                         amount={sale.amount}
