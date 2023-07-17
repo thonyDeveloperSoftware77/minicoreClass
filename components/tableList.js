@@ -14,7 +14,7 @@ function TableList(props) {
 
     return (
         <div>
-            <h2>Listado de Ventas junto con su respectivo Cliente</h2>
+            <h2>Listado de Ventas</h2>
             <table>
                 <thead>
                     <tr>
