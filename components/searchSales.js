@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { classes } from '../components/searchSales.module.css'
+import classes from '../components/searchSales.module.css'
+import { StyledButton } from "../components/ui/button";
 
 function SalesFiltered(props) {
   const startYearInputRef = useRef();
@@ -19,52 +20,52 @@ function SalesFiltered(props) {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <div>
-        <div>
+    <form className={classes.form} onSubmit={submitHandler}>
+      <div className={classes.controls}>
+        <div className={classes.control}>
           <label htmlFor='startYear'>Fecha inicio</label>
           <select id='startYear' ref={startYearInputRef}>
             <option value='2022'>2022</option>
             <option value='2023'>2023</option>
           </select>
           <select id='startMonth' ref={startMonthInputRef}>
-            <option value='1'>enero</option>
-            <option value='2'>Febrero</option>
-            <option value='3'>Marzo</option>
-            <option value='4'>Abril</option>
-            <option value='5'>Mayo</option>
-            <option value='6'>Junio</option>
-            <option value='7'>Julio</option>
-            <option value='8'>Agosto</option>
-            <option value='9'>Septiembre</option>
+            <option value='01'>enero</option>
+            <option value='02'>Febrero</option>
+            <option value='03'>Marzo</option>
+            <option value='04'>Abril</option>
+            <option value='05'>Mayo</option>
+            <option value='06'>Junio</option>
+            <option value='07'>Julio</option>
+            <option value='08'>Agosto</option>
+            <option value='09'>Septiembre</option>
             <option value='10'>Octubre</option>
             <option value='11'>Noviembre</option>
             <option value='12'>Diciembre</option>
           </select>
         </div>
-        <div>
+        <div className={classes.control}>
           <label htmlFor='endYear'>Fecha fin</label>
           <select id='endYear' ref={endYearInputRef}>
             <option value='2022'>2022</option>
             <option value='2023'>2023</option>
           </select>
           <select id='endMonth' ref={endMonthInputRef}>
-            <option value='1'>enero</option>
-            <option value='2'>Febrero</option>
-            <option value='3'>Marzo</option>
-            <option value='4'>Abril</option>
-            <option value='5'>Mayo</option>
-            <option value='6'>Junio</option>
-            <option value='7'>Julio</option>
-            <option value='8'>Agosto</option>
-            <option value='9'>Septiembre</option>
+            <option value='01'>enero</option>
+            <option value='02'>Febrero</option>
+            <option value='03'>Marzo</option>
+            <option value='04'>Abril</option>
+            <option value='05'>Mayo</option>
+            <option value='06'>Junio</option>
+            <option value='07'>Julio</option>
+            <option value='08'>Agosto</option>
+            <option value='09'>Septiembre</option>
             <option value='10'>Octubre</option>
             <option value='11'>Noviembre</option>
             <option value='12'>Diciembre</option>
           </select>
         </div>
       </div>
-      <button>Buscar</button>
+      <StyledButton text="Buscar" />
     </form>
   );
 }

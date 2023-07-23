@@ -1,10 +1,9 @@
-//return general unOrdered list of sales
+//return general map in an unOrdered list of sales
 
 import SaleItem from "./saleItem";
 
 function SalesList(props) {
     const { sales } = props;
-    console.log(sales.seller)
     //return general unOrdered list of sales
     return (
         <div>
@@ -14,7 +13,6 @@ function SalesList(props) {
                 {sales.map((sale) =>
                     <SaleItem
                         key={sale._id}
-                        id={sale._id}
                         date={sale.date}
                         seller={sale.sellerName}
                         product={sale.product}

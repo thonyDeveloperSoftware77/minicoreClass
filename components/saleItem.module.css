@@ -1,0 +1,40 @@
+/* Estilos para la lista */
+.li {
+    list-style: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilos para el encabezado h3 */
+  .li h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para los párrafos p */
+  .li p {
+    margin: 5px 0;
+  }
+  
+  /* Estilos para el enlace Link */
+  .li a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #b66213;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .li a:hover {
+    background-color: #ca7e37;
+  }
+  
+  /* contenedor de toda la lista dinámica */
+  .container{
+    margin-right: 2rem;
+  }

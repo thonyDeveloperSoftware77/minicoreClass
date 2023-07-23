@@ -1,9 +1,10 @@
+import classes from "./tableList.module.css";
 import React from 'react';
 
 function formatDate(dateString) {
-    // Parsea la fecha a un objeto Date teniendo en cuenta la zona horaria
+    //Parsea la fecha a un objeto Date teniendo en cuenta la zona horaria
     const date = new Date(dateString);
-    // Ajusta la fecha para reflejar la zona horaria local del usuario
+    //Ajusta la fecha para reflejar la zona horaria local del usuario
     const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return adjustedDate.toLocaleDateString(undefined, options);
@@ -13,9 +14,9 @@ function TableList(props) {
     const { sales } = props;
 
     return (
-        <div>
+        <div className={classes.tableContainer}>
             <h2>Listado de Ventas</h2>
-            <table>
+            <table className={classes.table}>
                 <thead>
                     <tr>
                         <th>Fecha Venta</th>
@@ -30,7 +31,7 @@ function TableList(props) {
                             <td>{formatDate(sale.date)}</td>
                             <td>{sale.sellerName}</td>
                             <td>{sale.product}</td>
-                            <td>{sale.amount}</td>
+                            <td>$ {sale.amount}</td>
                         </tr>
                     ))}
                 </tbody>

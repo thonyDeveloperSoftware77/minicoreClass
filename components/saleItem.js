@@ -1,19 +1,39 @@
 //return ordered list of items's sales
+import { useEffect, useState } from "react";
+import classes from "./saleItem.module.css";
 
 function SaleItem(props) {
-    const {id, date, seller, product, amount} = props
-    //dar formato y calcular 0.0
+    const { date, seller, product, amount } = props
+    const [formattedDate, setFormattedDate] = useState("");
+    const [totalAmount, setTotalAmount] = useState(0);
 
-    //return ordered list of items's sales
-    return(
-        <li>
-            <p>Fecha venta: {date}</p>
-            <br/>
+    console.log(props)
+    //give format to the data as needed
+    useEffect(() => {//format for DATE
+        const dbDate = new Date(date);
+
+        //separate object DATE from mongodb
+        const year = dbDate.getFullYear();
+        const month = String(dbDate.getMonth() + 1).padStart(2, '0'); // Se suma 1 ya que los meses son zero-based
+        const day = String(dbDate.getDate()).padStart(2, '0');
+        //formatted to "yyyy-mm-dd"
+        const formattedDateString = `${year}-${month}-${day}`;
+        //save the values
+        setFormattedDate(formattedDateString);
+    }, [date]);
+
+    // Calcular la suma de los montos cuando cambie el prop 'amount'
+    useEffect(() => {
+        setTotalAmount(prevTotalAmount => prevTotalAmount + amount);
+    }, [amount]);
+
+    return (
+        <li className={classes.li}>
             <h3>Vendedor: {seller}</h3>
-            <br/>
+            <p>Fecha venta: {formattedDate}</p>
             <p>Producto: {product}</p>
-            <br/>
-            <p>Monto: {amount}</p>
+            <p>Monto: ${amount}</p>
+            <p>Total: ${totalAmount}</p>
         </li>
     )
 }
