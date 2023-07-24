@@ -28,7 +28,7 @@ function SalesFilteredPage(props) {
         .then((response) => response.json())
         .then((data) => {
           //const startDateObj = new Date(startDate);//todo el formato no va a coincidir la hora, así que mejor poner el de la db a yyyy-mm-dd
-          console.log(startDate);
+          //console.log(startDate);
           const filteredData = data.sales.filter((sale) => {
             const saleDate = new Date(sale.date);
 

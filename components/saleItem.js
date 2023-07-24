@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import classes from "./saleItem.module.css";
 
 function SaleItem(props) {
-    const { date, seller, product, amount } = props
+    const { date, sellerName, product, amount, totalAmount } = props
     const [formattedDate, setFormattedDate] = useState("");
-    const [totalAmount, setTotalAmount] = useState(0);
 
-    console.log(props)
     //give format to the data as needed
     useEffect(() => {//format for DATE
         const dbDate = new Date(date);
@@ -22,18 +20,13 @@ function SaleItem(props) {
         setFormattedDate(formattedDateString);
     }, [date]);
 
-    // Calcular la suma de los montos cuando cambie el prop 'amount'
-    useEffect(() => {
-        setTotalAmount(prevTotalAmount => prevTotalAmount + amount);
-    }, [amount]);
-
     return (
         <li className={classes.li}>
-            <h3>Vendedor: {seller}</h3>
+            <h3>Vendedor: {sellerName}</h3>
             <p>Fecha venta: {formattedDate}</p>
             <p>Producto: {product}</p>
             <p>Monto: ${amount}</p>
-            <p>Total: ${totalAmount}</p>
+            <p>Total del vendedor: ${totalAmount}</p>
         </li>
     )
 }

@@ -23,8 +23,8 @@ export default function Home() {
 
   function findSalesHandler(startYear, startMonth, endYear, endMonth) {
     // Obtener los datos filtrados según las fechas seleccionadas
-    const startDate = `${startYear}-${startMonth}-22`;
-    const endDate = `${endYear}-${endMonth}-22`;
+    const startDate = `${startYear}-${startMonth}-24`;
+    const endDate = `${endYear}-${endMonth}-24`;
 
     // Redirigir a SalesFilteredPage con las fechas de inicio y fin como parte de la ruta
     router.push(`/${startDate}/${endDate}`);
