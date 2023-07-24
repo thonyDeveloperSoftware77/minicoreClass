@@ -1,6 +1,6 @@
 import classes from "../components/saleItem.module.css";
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SalesList from "../components/salesList";
 
 function SalesFilteredPage(props) {
@@ -8,53 +8,46 @@ function SalesFilteredPage(props) {
   const router = useRouter();
   const filterDate = router.query.brick;
   //extract the data from the url
-  const startDate = filterDate[0];
-  const endDate = filterDate[1];
+  const startDate = filterDate ? filterDate[0] : null;
+  const endDate = filterDate ? filterDate[1] : null;
 
-  if (!filterDate) {
-    return <p>Cargando datos...</p>;
-  }
-
-  if (startDate && endDate) {
-    useEffect(() => {
+  useEffect(() => {
+    if (startDate && endDate) {
       fetchData();
-    }, []);
-  }
+    }
+  }, [startDate, endDate]);
 
   //filter fata by DATE
   const fetchData = async () => {
     try {
-      fetch('/api/sales')
-        .then((response) => response.json())
-        .then((data) => {
-          //const startDateObj = new Date(startDate);//todo el formato no va a coincidir la hora, así que mejor poner el de la db a yyyy-mm-dd
-          //console.log(startDate);
-          const filteredData = data.sales.filter((sale) => {
-            const saleDate = new Date(sale.date);
+      const response = await fetch('/api/sales');
+      const data = await response.json();
+      const filteredData = data.sales.filter((sale) => {
+        const saleDate = new Date(sale.date);
 
-            //separate object DATE from mongodb
-            const year = saleDate.getFullYear();
-            const month = String(saleDate.getMonth() + 1).padStart(2, '0'); // Se suma 1 ya que los meses son zero-based
-            const day = String(saleDate.getDate()).padStart(2, '0');
+        //separate object DATE from mongodb
+        const year = saleDate.getFullYear();
+        const month = String(saleDate.getMonth() + 1).padStart(2, '0'); // Se suma 1 ya que los meses son zero-based
+        const day = String(saleDate.getDate()).padStart(2, '0');
 
-            //formatted to "yyyy-mm-dd"
-            const formattedDateString = `${year}-${month}-${day}`;
+        //formatted to "yyyy-mm-dd"
+        const formattedDateString = `${year}-${month}-${day}`;
 
-            return formattedDateString >= startDate && formattedDateString < endDate;
-          });
+        return formattedDateString >= startDate && formattedDateString < endDate;
+      });
+      setFilteredSales(filteredData);
 
-          setFilteredSales(filteredData);
-          if (!filteredData || filteredData.length === 0) {
-            console.error('NO se encontraron ventas en estas fechas...')
-            return <p>NO se encontraron ventas en las fechas especificadas</p>;
-          }
-
-        });
-
+      if (!filteredData || filteredData.length === 0) {
+        console.error('NO se encontraron ventas en estas fechas...')
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
+  if (!filterDate) {
+    return <p>Cargando datos...</p>;
+  }
 
   return (
     <div className={classes.container}>

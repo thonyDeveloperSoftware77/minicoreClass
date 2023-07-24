@@ -3,9 +3,9 @@ import classes from './button.module.css';
 import React from "react";
 
 //Clase padre
-class Button extends React.Component {
+class Button extends React.Component { //abstract base class in React components
   render() {
-    throw new Error("Este método solo puede ser implementado en las subclases");
+    return null;
   }
 }
 

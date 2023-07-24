@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import classes from "./saleItem.module.css";
 
 function SaleItem(props) {
-    const { date, sellerName, product, amount, totalAmount } = props
+    const { date, seller, product, amount, totalAmount } = props
     const [formattedDate, setFormattedDate] = useState("");
 
     //give format to the data as needed
@@ -22,7 +22,7 @@ function SaleItem(props) {
 
     return (
         <li className={classes.li}>
-            <h3>Vendedor: {sellerName}</h3>
+            <h3>Vendedor: {seller}</h3>
             <p>Fecha venta: {formattedDate}</p>
             <p>Producto: {product}</p>
             <p>Monto: ${amount}</p>
