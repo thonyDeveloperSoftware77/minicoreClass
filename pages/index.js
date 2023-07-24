@@ -59,6 +59,7 @@ export default function Home() {
         <br />
         <h3>Para realizar el cálculo dentro de un periodo de tiempo: </h3>
         <br/>
+        <p>ejemplo de fecha: 2022-Junio al 2023-Julio</p>
         {/* Componente searchSales */}
         <SalesFiltered onSearch={findSalesHandler} />
       </main>
