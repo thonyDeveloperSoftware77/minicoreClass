@@ -51,7 +51,7 @@ function SalesFilteredPage(props) {
 
   return (
     <div className={classes.container}>
-      <h1>Filtrado por mes y año</h1>
+      <h1 className={classes.title}>Filtrado por mes y año</h1>
       <SalesList sales={filteredSales} />
     </div>
   );
