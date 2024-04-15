@@ -55,12 +55,6 @@ export default function Home() {
           />
         </div>
         {showList && <TableList sales={salesItems} />} {/* Pasa los datos de salesItems al componente SalesList */}
-
-        <br />
-        <h3>Para realizar el cálculo dentro de un periodo de tiempo: </h3>
-        <br/>
-        <p>ejemplo de fecha: 2022-Junio al 2023-Julio</p>
-        {/* Componente searchSales */}
         <SalesFiltered onSearch={findSalesHandler} />
       </main>
 

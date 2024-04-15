@@ -1,14 +1,17 @@
 import classes from "./tableList.module.css";
 import React from 'react';
 
-function formatDate(dateString) {
-    //Parsea la fecha a un objeto Date teniendo en cuenta la zona horaria
-    const date = new Date(dateString);
-    //Ajusta la fecha para reflejar la zona horaria local del usuario
+function formatDate(firestoreTimestamp) {
+    // Convierte el timestamp de Firestore a un objeto Date de JavaScript
+    const date = new Date(firestoreTimestamp.seconds * 1000);
+
+    // Ajusta la fecha para reflejar la zona horaria local del usuario
     const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return adjustedDate.toLocaleDateString(undefined, options);
 }
+
 
 function TableList(props) {
     const { sales } = props;

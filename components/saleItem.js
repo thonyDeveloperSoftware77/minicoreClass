@@ -8,16 +8,19 @@ function SaleItem(props) {
 
     //give format to the data as needed
     useEffect(() => {//format for DATE
-        const dbDate = new Date(date);
+        const dbDate = new Date(date.seconds * 1000); // Convert Firestore timestamp to JavaScript Date
 
-        //separate object DATE from mongodb
+        // Separate date components
         const year = dbDate.getFullYear();
-        const month = String(dbDate.getMonth() + 1).padStart(2, '0'); // Se suma 1 ya que los meses son zero-based
+        const month = String(dbDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
         const day = String(dbDate.getDate()).padStart(2, '0');
-        //formatted to "yyyy-mm-dd"
+        
+        // Formatted to "yyyy-mm-dd"
         const formattedDateString = `${year}-${month}-${day}`;
-        //save the values
+        
+        // Save the values
         setFormattedDate(formattedDateString);
+        
     }, [date]);
 
     return (

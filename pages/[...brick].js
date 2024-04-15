@@ -23,14 +23,13 @@ function SalesFilteredPage(props) {
       const response = await fetch('/api/sales');
       const data = await response.json();
       const filteredData = data.sales.filter((sale) => {
-        const saleDate = new Date(sale.date);
+        const saleDate = new Date(sale.date.seconds * 1000); // Convert Firestore timestamp to JavaScript Date
+        console.log(saleDate);
 
-        //separate object DATE from mongodb
         const year = saleDate.getFullYear();
-        const month = String(saleDate.getMonth() + 1).padStart(2, '0'); // Se suma 1 ya que los meses son zero-based
+        const month = String(saleDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
         const day = String(saleDate.getDate()).padStart(2, '0');
 
-        //formatted to "yyyy-mm-dd"
         const formattedDateString = `${year}-${month}-${day}`;
 
         return formattedDateString >= startDate && formattedDateString < endDate;

@@ -8,7 +8,7 @@ function SalesList(props) {
     // Calcular la suma total de montos de ventas por vendedor
   const salesBySeller = sales.reduce((accumulator, sale) => {
     const { seller, amount } = sale;
-    accumulator[seller] = (accumulator[seller] || 0) + amount;
+    accumulator[seller] = (accumulator[seller] || 0) + Number(amount);
     return accumulator;
   }, {});
 
@@ -24,7 +24,7 @@ function SalesList(props) {
                         date = {sale.date}
                         seller = {sale.sellerName}
                         product = {sale.product}
-                        amount = {sale.amount}
+                        amount = {Number(sale.amount)}
                         //{...sale}
                         totalAmount={salesBySeller[sale.seller]}
                     />

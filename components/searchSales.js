@@ -25,8 +25,8 @@ function SalesFiltered(props) {
         <div className={classes.control}>
           <label htmlFor='startYear'>Fecha inicio</label>
           <select id='startYear' ref={startYearInputRef}>
-            <option value='2022'>2022</option>
             <option value='2023'>2023</option>
+            <option value='2024'>2024</option>
           </select>
           <select id='startMonth' ref={startMonthInputRef}>
             <option value='01'>enero</option>
@@ -46,8 +46,8 @@ function SalesFiltered(props) {
         <div className={classes.control}>
           <label htmlFor='endYear'>Fecha fin</label>
           <select id='endYear' ref={endYearInputRef}>
-            <option value='2022'>2022</option>
             <option value='2023'>2023</option>
+            <option value='2024'>2024</option>
           </select>
           <select id='endMonth' ref={endMonthInputRef}>
             <option value='01'>enero</option>

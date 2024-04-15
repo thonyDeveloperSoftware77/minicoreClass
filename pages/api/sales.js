@@ -1,33 +1,30 @@
-import { MongoClient, ObjectId } from 'mongodb';
-
-
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "../../db/firebase";
 async function handler(req, res) {
-    //connection
-    const client = await MongoClient.connect(
-        'mongodb+srv://crud:crud123@web.gq8l24z.mongodb.net/?retryWrites=true&w=majority'
-    );
-    //GET request
+
+
+    // GET request
     if (req.method === 'GET') {
-        const db = client.db('minicore');
-
-        const salesCollection = db.collection('sales');
-        const salesData = await salesCollection.find().toArray();
-        //res.status(200).json({ sales: data });
-
-        // Obtener el nombre del vendedor para cada venta
-        const salesWithSellerName = await Promise.all(
-            salesData.map(async (sale) => {
-                const sellersCollection = db.collection('seller');
-                const seller = await sellersCollection.findOne({ _id: new ObjectId(sale.sellerId) });
-                const saleWithSellerName = { ...sale, sellerName: seller ? seller.name : 'Vendedor desconocido' };
-                return saleWithSellerName;
-            })
-        );
-
+        console.log('GET request');
+        const salesCollection = collection(db, 'sales');
+        const salesSnapshot = await getDocs(salesCollection);
+        const salesData = salesSnapshot.docs.map(doc => doc.data());
+      
+        const sellersCollection = collection(db, 'seller');
+        const sellersSnapshot = await getDocs(sellersCollection);
+        const sellersData = sellersSnapshot.docs.map(doc => doc.data());
+      
+        console.log(salesData);
+        console.log(sellersData);
+        // Get the seller name for each sale
+        const salesWithSellerName = salesData.map(sale => {
+          const seller = sellersData.find(seller => seller._id === sale.sellerId);
+          return { ...sale, sellerName: seller ? seller.name : 'Vendedor desconocido' };
+        });
+        
         res.status(200).json({ sales: salesWithSellerName });
-    }
 
-    client.close();
+    }
 }
 
 export default handler;
